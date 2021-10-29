@@ -101,7 +101,7 @@ def handle(update):
 
 		if text == "/start" or text == "/refresh":
 			if not uid in queue["occupied"]:
-				keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="👨‍💻Owner", url=f"https://t.me/{OWNER}"),InlineKeyboardButton(text="💬Grup", url=f"t.me/{GROUP}"),InlineKeyboardButton(text="📣Channel", url=f"https://t.me/{CHANNEL}")]])
+				keyboard = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text="👨‍💻Owner", url=f"https://t.me/{OWNER}"),InlineKeyboardButton(text="💬Grup", url=f"https://t.me/{GROUP}"),InlineKeyboardButton(text="📣Channel", url=f"https://t.me/{CHANNEL}")]])
 				bot.sendMessage(uid, f"👋🏻 Hai, Selamat Datang Di {PROJECT_NAME} \n\n💬 Untuk mencari teman obrolan gunakan perintah /search pada bot_\n\n*Selamat Mencari!* 🥳", parse_mode='MarkDown', disable_web_page_preview=True , reply_markup=keyboard)
 		if 'message_id' in update:
 			if not uid in queue["occupied"]:
@@ -116,33 +116,6 @@ def handle(update):
                     ['Plain text', KeyboardButton(text='Text only')],
 					[dict(text='phone', request_contact=True), KeyboardButton(text='Location', request_location=True)]], resize_keyboard=True)
 				bot.sendMessage(uid, "contoh", reply_markup=lolt)
-
-		elif text == "/user":
-			if str(uid) in ADMIN :
-				file = open("is.txt", "r")
-				text = "Pengguna : " + str(len(file.readlines())) + " Online👤"
-				bot.sendMessage(uid, text)
-			else:
-				bot.sendMessage(uid, "🤖 *Bot :* 👮 Perintah ini hanya untuk admin")
-		elif text == 'Info Profile 📌':
-			if str(uid) in ADMIN :
-				name = update["from"]["first_name"]
-				_id = update["from"]["id"]
-				username = update["from"]["username"]
-				tipe = update["chat"]["type"]
-				date1 = datetime.fromtimestamp(update["date"], tz=pytz.timezone("asia/jakarta")).strftime("%d/%m/%Y %H:%M:%S").split()
-				text = "*Nama : " + str(name)+"*" +"\n"
-				text += "*ID Kamu :* " +"`"+ str(_id) +"`"+"\n"
-				text += f"*Username :* @{username}"+ "\n"
-				text += "*Tipe Chat* : " +"_"+ str(tipe)+"_" +"\n"
-				text += "*Tanggal :* " + str(date1[0]) +"\n"
-				text += "*Waktu :* " + str(date1[1]) + " WIB" "\n"
-				bot.sendMessage(uid, text, parse_mode='MarkDown', reply_to_message_id=update['message_id'])
-			else:
-				bahasa = update["from"]["language_code"]
-				name = update["from"]["first_name"]
-				_id = update["from"]["id"]
-				bot.sendMessage(uid, f"Nama = {name}\nID = `{_id}`\nBahasa = {bahasa}", parse_mode="MarkDown")
 
 		elif text == 'Search 🔍' or text == "/search":
 			if not uid in queue["occupied"]:
